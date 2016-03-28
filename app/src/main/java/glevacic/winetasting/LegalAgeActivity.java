@@ -18,7 +18,7 @@ public class LegalAgeActivity extends AppCompatActivity {
 
     @Click(R.id.buttonLegalAge_agree)
     void agree() {
-        Intent intent = new Intent(this, AddPlayersActivity_.class);
+        Intent intent = new Intent(this, GameActivity_.class);
         startActivity(intent);
     }
 }

@@ -1,5 +1,6 @@
 package glevacic.winetasting;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
@@ -7,11 +8,16 @@ public class Player {
     private static String name;
     private List<ActiveStatus> activeStatuses;
 
-    private String getName() {
+    public Player(String n) {
+        name = n;
+        activeStatuses = new ArrayList<>();
+    }
+
+    public String getName() {
         return name;
     }
 
-    private List<ActiveStatus> getActiveStatuses() {
+    public List<ActiveStatus> getActiveStatuses() {
         return activeStatuses;
     }
 
