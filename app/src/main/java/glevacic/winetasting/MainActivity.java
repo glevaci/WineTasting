@@ -9,38 +9,34 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.androidannotations.annotations.EActivity;
-
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-@EActivity
-public class GameActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
+
+    Button buttonNext;
 
     private static final String TABLE = "tasks";
     private static final String KEY_ID = "_id";
     private static final String KEY_DESCRIPTION = "description";
     private static final String KEY_TYPE = "type";
-    private static final String[] COLUMNS = { KEY_DESCRIPTION, KEY_TYPE };
+    private static final String[] COLUMNS = {KEY_DESCRIPTION, KEY_TYPE};
 
-    private static Set<Integer> usedTasks = new HashSet<>();
-    private static Random random = new Random();
+    private Set<Integer> usedTasks = new HashSet<>();
+    private Random random = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
+        setContentView(R.layout.activity_main);
 
         DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext());
         final SQLiteDatabase database = databaseHelper.getReadableDatabase();
         final int numberOfTasks = (int) DatabaseUtils.queryNumEntries(database, TABLE);
 
-        // display first task
-        displayNextTask(numberOfTasks, database);
-
-        Button buttonNext = (Button) findViewById(R.id.buttonGame_next);
+        buttonNext = (Button) findViewById(R.id.buttonNext);
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,8 +47,9 @@ public class GameActivity extends AppCompatActivity {
 
     private void displayNextTask(int numberOfTasks, SQLiteDatabase database) {
 
-        if (usedTasks.size() == numberOfTasks)
+        if (usedTasks.size() == numberOfTasks) {
             usedTasks.clear();
+        }
 
         int taskId = getNextTaskId(numberOfTasks);
         usedTasks.add(taskId);
@@ -69,7 +66,7 @@ public class GameActivity extends AppCompatActivity {
                             null);                  // limit
 
         cursor.moveToFirst();
-        TextView txtView = (TextView) findViewById(R.id.textViewGame_task);
+        TextView txtView = (TextView) findViewById(R.id.textViewTask);
         txtView.setText(cursor.getString(0));
         cursor.close();
     }
@@ -78,7 +75,7 @@ public class GameActivity extends AppCompatActivity {
         // indices in table start from 1
         int taskId = random.nextInt(numberOfTasks)+1;
         while (usedTasks.contains(taskId))
-            taskId = random.nextInt(numberOfTasks)+1;
+            taskId = random.nextInt(numberOfTasks);
         return taskId;
     }
 }

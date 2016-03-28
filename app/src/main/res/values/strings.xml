@@ -1,22 +1,3 @@
 <resources>
     <string name="app_name">WineTasting</string>
-    <string name="start">Započni</string>
-    <string name="rules">Pravila</string>
-    <string name="quit">Izađi</string>
-    <string name="instructions_main_heading">Upute</string>
-    <string name="instructions_description">Ovo je igra za odrasle. Upozorenje: igra uključuje puno političke nekorektnosti, sarkazma, satire i crnog humora. Igra se uz dobro vino ili neko drugo alkoholno piće, pa je punoljetnost nužna.</string>
-    <string name="instructions_players_heading">Igrači</string>
-    <string name="instructions_players_description">Prije početka igre dodajete igrače. Igrače je moguće obrisati tijekom igre. Također je moguće dodati novog igrača. Ime trenutnog igrača piše na vrhu zaslona.</string>
-    <string name="instructions_cards_heading">Kartice</string>
-    <string name="instructions_cards_info">Postoje tri vrste kartica: čin, obveza i status.</string>
-    <string name="instructions_card_action">Kartica čina se odnosi na trenutnog igrača. On treba izvršiti zadatak koji piše na kartici.</string>
-    <string name="instructions_card_mandatory">Kartica obveze se odnosi na sve igrače, ili na one igrače koje kartica opisuje (npr. sve žene). Svi oni trebaju izvršiti ono što kartica nalaže.</string>
-    <string name="legal_age_info">Klikom na donji gumb potvrđujem da imam više od 18 godina.</string>
-    <string name="add_players_main_heading">Igrači</string>
-    <string name="add_players_add">dodaj</string>
-    <string name="add_players_play">igraj</string>
-    <string name="add_players_existing_players">Postojeći igrači</string>
-    <string name="instructions_card_status">Kartica statusa zadaje trenutnom igraču kako se on treba početi ponašati. Najčešće vrijede neograničeno, odnosno dok se ne pojavi kartica koja ih može poništiti.</string>
-    <string name="legal_age_agree">potvrđujem</string>
-    <string name="game_next">sljedeći zadatak</string>
 </resources>
