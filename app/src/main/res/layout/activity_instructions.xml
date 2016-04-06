@@ -10,125 +10,63 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".InstructionsActivity">
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/a_instructions_tv_heading"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/instructions_heading"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_below="@+id/a_instructions_tv_heading"
+                  android:layout_alignParentLeft="true"
+                  android:layout_alignParentStart="true">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_column="0">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/a_instructions_tv_players_heading"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/instructions_players_heading"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/instructions_main_heading"
-                    android:id="@+id/textViewInstructions_mainHeading"/>
-            </TableRow>
-        </TableRow>
+        <WebView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/a_instructions_wv_players_description"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"/>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/instructions_cards_heading"
+            android:id="@+id/a_instructions_tv_cards_heading"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"/>
 
-        </TableRow>
+        <WebView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/a_instructions_wv_cards_description"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/instructions_players_heading"
-                android:id="@+id/textViewInstructions_playersHeading"/>
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/instructions_players_description"
-                android:id="@+id/textViewInstructions_playersDescription"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/instructions_cards_heading"
-                android:id="@+id/textViewInstructions_cardsHeading"
-                android:layout_column="0"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/instructions_cards_info"
-                android:id="@+id/textViewInstructions_cardsDescription"
-                android:layout_column="0"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/instructions_card_action"
-                android:id="@+id/textViewInstructions_cardAction"
-                android:layout_column="0"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/instructions_card_mandatory"
-                android:id="@+id/textViewInstruction_cardMandatory"
-                android:layout_column="0"/>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/instructions_card_status"
-                android:id="@+id/textViewInstructions_cardStatus"
-                android:layout_column="0"/>
-        </TableRow>
-    </TableLayout>
 </RelativeLayout>

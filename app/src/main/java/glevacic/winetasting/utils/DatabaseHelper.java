@@ -1,4 +1,4 @@
-package glevacic.winetasting;
+package glevacic.winetasting.utils;
 
 import android.content.Context;
 

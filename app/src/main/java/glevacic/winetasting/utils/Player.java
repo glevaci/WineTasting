@@ -1,4 +1,4 @@
-package glevacic.winetasting;
+package glevacic.winetasting.utils;
 
 import java.util.ArrayList;
 import java.util.List;

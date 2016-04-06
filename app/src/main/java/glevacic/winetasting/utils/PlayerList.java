@@ -1,4 +1,4 @@
-package glevacic.winetasting;
+package glevacic.winetasting.utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +18,10 @@ public class PlayerList {
         return players;
     }
 
+    public Player getCurrentPlayer() {
+        return players.get(currentPlayerIndex);
+    }
+
     public Player getNextPlayer() {
         if (players.isEmpty())
             return null;
@@ -27,7 +31,7 @@ public class PlayerList {
         else
             currentPlayerIndex = 0;
 
-        return  players.get(currentPlayerIndex);
+        return players.get(currentPlayerIndex);
     }
 
     public void removePlayer(String playerName) {
@@ -38,9 +42,5 @@ public class PlayerList {
 
     public void addPlayer(Player player) {
         players.add(player);
-    }
-
-    public List<Player> getAllPlayers() {
-        return players;
     }
 }

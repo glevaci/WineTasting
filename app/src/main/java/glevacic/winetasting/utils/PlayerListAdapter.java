@@ -1,4 +1,4 @@
-package glevacic.winetasting;
+package glevacic.winetasting.utils;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import java.util.List;
+
+import glevacic.winetasting.R;
 
 public class PlayerListAdapter extends BaseExpandableListAdapter {
 
@@ -63,7 +65,7 @@ public class PlayerListAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context
                                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_item, parent, false);
+            convertView = inflater.inflate(R.layout.item_player, parent, false);
         }
         TextView tv = (TextView) convertView.findViewById(R.id.player_name);
         tv.setText(group.getName());
@@ -82,7 +84,7 @@ public class PlayerListAdapter extends BaseExpandableListAdapter {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context
                                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_subitem, parent, false);
+            convertView = inflater.inflate(R.layout.item_status, parent, false);
         }
         TextView textView = (TextView) convertView.findViewById(R.id.player_status);
         textView.setText(status.toString());

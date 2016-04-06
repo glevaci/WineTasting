@@ -1,4 +1,4 @@
-package glevacic.winetasting;
+package glevacic.winetasting.utils;
 
 public class ActiveStatus {
     private String title;

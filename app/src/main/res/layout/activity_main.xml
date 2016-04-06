@@ -18,11 +18,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Task"
-            android:id="@+id/textViewTask"
-            android:layout_marginTop="63dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:id="@+id/main_textViewTaskDescription"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -32,32 +30,54 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="26dp"
-            android:longClickable="true" />
+            android:longClickable="false"
+            android:enabled="false"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/main_textViewPlayer"
+            android:layout_marginTop="23dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/main_textViewTaskHeading"
+            android:layout_below="@+id/main_textViewPlayer"
+            android:layout_alignLeft="@+id/main_textViewPlayer"
+            android:layout_alignStart="@+id/main_textViewPlayer"
+            android:layout_marginTop="75dp"/>
     </RelativeLayout>
 
 
     <!-- drawer with player list -->
-    <LinearLayout
+    <!--<LinearLayout
         android:id="@+id/drawer"
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:orientation="vertical">
-
+        android:orientation="vertical">-->
+<!--
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ButtonDrawer_newPlayer"
             android:id="@+id/buttonDrawer_newPlayer"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:focusable="false"/>-->
 
         <ExpandableListView
-            android:id="@+id/drawer_list"
+            android:id="@+id/drawer"
             android:layout_width="240dp"
             android:background="#fff"
             android:layout_height="match_parent"
-            android:layout_gravity="start" />
-
-    </LinearLayout>
+            android:layout_gravity="start"
+            android:focusable="false"/>
+<!--
+    </LinearLayout>-->
 </android.support.v4.widget.DrawerLayout>
