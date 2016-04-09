@@ -86,7 +86,7 @@ public class PlayerListAdapter extends BaseExpandableListAdapter {
                                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.item_status, parent, false);
         }
-        TextView textView = (TextView) convertView.findViewById(R.id.player_status);
+        TextView textView = (TextView) convertView.findViewById(R.id.item_status_heading);
         textView.setText(status.toString());
         return convertView;
     }

@@ -1,7 +1,8 @@
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                        android:id="@+id/drawer_layout"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent" >
+<android.support.v4.widget.DrawerLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
     <!-- main view -->
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,20 +14,27 @@
                     android:paddingRight="@dimen/activity_horizontal_margin"
                     android:paddingTop="@dimen/activity_vertical_margin"
                     tools:context=".MainActivity">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/a_main_tv_task_heading"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/main_textViewTaskDescription"
+            android:id="@+id/a_main_tv_task_description"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="sljedeći zadatak"
-            android:id="@+id/buttonGame_next"
+            android:text="@string/next_task"
+            android:id="@+id/a_main_btn_next"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="26dp"
@@ -37,47 +45,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/main_textViewPlayer"
+            android:id="@+id/a_main_tv_player_name"
             android:layout_marginTop="23dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/main_textViewTaskHeading"
-            android:layout_below="@+id/main_textViewPlayer"
-            android:layout_alignLeft="@+id/main_textViewPlayer"
-            android:layout_alignStart="@+id/main_textViewPlayer"
-            android:layout_marginTop="75dp"/>
     </RelativeLayout>
 
 
     <!-- drawer with player list -->
-    <!--<LinearLayout
-        android:id="@+id/drawer"
+    <LinearLayout
+        android:id="@+id/a_main_ll_drawer"
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:orientation="vertical">-->
-<!--
+        android:orientation="vertical">
+
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ButtonDrawer_newPlayer"
-            android:id="@+id/buttonDrawer_newPlayer"
+            android:id="@+id/dr_btn_new_player"
             android:layout_marginTop="20dp"
-            android:focusable="false"/>-->
+            android:focusable="false"/>
 
         <ExpandableListView
-            android:id="@+id/drawer"
+            android:id="@+id/dr_elv_players"
             android:layout_width="240dp"
             android:background="#fff"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:focusable="false"/>
-<!--
-    </LinearLayout>-->
+    </LinearLayout>
+
 </android.support.v4.widget.DrawerLayout>

@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".InstructionsActivity">
+    tools:context=".activities.InstructionsActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -38,15 +38,20 @@
             android:layout_marginBottom="5dp"
             android:text="@string/instructions_players_heading"/>
 
-        <WebView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/a_instructions_wv_players_description"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"/>
+        <com.bluejamesbond.text.DocumentView
+            xmlns:ext="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            ext:documentView_cacheConfig="auto_quality"
+            ext:documentView_antialias="true"
+            ext:documentView_hyphen="-"
+            ext:documentView_reverse="false"
+            ext:documentView_textAlignment="justified"
+            ext:documentView_textFormat="plain"
+            ext:documentView_textSize="14sp"
+            ext:documentView_textSubPixel="true"
+            ext:documentView_text="@string/instructions_players_description"
+            android:id="@+id/a_instructions_dv_players_description"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -58,15 +63,21 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="5dp"/>
 
-        <WebView
-            android:layout_width="fill_parent"
+        <com.bluejamesbond.text.DocumentView
+            xmlns:ext="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/a_instructions_wv_cards_description"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"/>
+            ext:documentView_cacheConfig="auto_quality"
+            ext:documentView_antialias="true"
+            ext:documentView_hyphen="-"
+            ext:documentView_reverse="false"
+            ext:documentView_textAlignment="justified"
+            ext:documentView_textFormat="formatted"
+            ext:documentView_textSize="14sp"
+            ext:documentView_textSubPixel="true"
+            ext:documentView_text="@string/instructions_cards_description"
+            android:id="@+id/a_instructions_dv_cards_description"/>
+
     </LinearLayout>
 
 </RelativeLayout>

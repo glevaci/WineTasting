@@ -1,10 +1,18 @@
 package glevacic.winetasting.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.webkit.WebView;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
+
+import com.bluejamesbond.text.DocumentView;
 
 import glevacic.winetasting.R;
+
+import static android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
 
 public class InstructionsActivity extends AppCompatActivity {
 
@@ -13,26 +21,51 @@ public class InstructionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructions);
 
-        String htmlPlayers = "<html><body style=\"text-align:justify\"> <p> %s </p> </body></Html>";
-        WebView wvPlayersDescription = (WebView) findViewById(R.id.a_instructions_wv_players_description);
-        String description = String.format(htmlPlayers, getResources().getString(R.string.instructions_players_description));
-        wvPlayersDescription.loadData(description, "text/html; charset=utf-8", "utf-8");
+        DocumentView documentView = (DocumentView) findViewById(R.id.a_instructions_dv_cards_description);
 
-        String htmlCards = "<html><body style=\"text-align:justify\"> " +
-                "<p> %s </p>" +
-                "<ul> " +
-                        "<li> %s </li>" +
-                        "<li> %s </li>" +
-                        "<li> %s </li>" +
-                "</ul></body></Html>";
+        SpannableStringBuilder spannableString = new SpannableStringBuilder();
+        spannableString.append(getResources().getString(R.string.instructions_cards_description))
+                .append(System.getProperty("line.separator"));
 
-        WebView wvCardsDescription = (WebView) findViewById(R.id.a_instructions_wv_cards_description);
-        description = String.format(htmlCards,
-                getResources().getString(R.string.instructions_cards_description),
-                getResources().getString(R.string.instructions_card_action),
-                getResources().getString(R.string.instructions_card_mandatory),
-                getResources().getString(R.string.instructions_card_status)
-        );
-        wvCardsDescription.loadData(description, "text/html; charset=utf-8", "utf-8");
+        String card = getResources().getString(R.string.instructions_card_action);
+        int start = spannableString.length();
+        int end = start + getEndingIndex(card);
+        spannableString.append(card)
+                .setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.colorAction)),
+                        start, end, SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        spannableString.append(System.getProperty("line.separator"));
+
+        card = getResources().getString(R.string.instructions_card_mandatory);
+        start = spannableString.length();
+        end = start + getEndingIndex(card);
+        spannableString.append(card)
+                .setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.colorMandatory)),
+                        start, end, SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        spannableString.append(System.getProperty("line.separator"));
+
+        card = getResources().getString(R.string.instructions_card_status);
+        start = spannableString.length();
+        end = start + getEndingIndex(card);
+        spannableString.append(card)
+                .setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.colorStatus)),
+                        start, end, SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        spannableString.append(System.getProperty("line.separator"));
+
+        documentView.setText(spannableString);
+    }
+
+    // return index of second space (second word separator - always our case) in string
+    private int getEndingIndex(String string) {
+        int cnt = 0;
+        for (int i=0; i < string.length(); ++i) {
+            if (Character.isWhitespace(string.charAt(i)))
+                ++cnt;
+            if (cnt == 2)
+                return i;
+        }
+        return 0;
     }
 }

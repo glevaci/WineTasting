@@ -1,23 +1,30 @@
 package glevacic.winetasting.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
-import org.androidannotations.annotations.Click;
-import org.androidannotations.annotations.EActivity;
-
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import java.util.TreeSet;
+
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
 
 import glevacic.winetasting.R;
 import glevacic.winetasting.utils.ActiveStatus;
@@ -45,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private Set<Integer> usedTasks;
     private Random random;
 
-    private boolean waitingForPlayers = false;
+    private boolean waitingForPlayers = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
         setUpDrawer();
         setUpDatabase();
         setInitialTaskData();
-        //displayInitialMessage();
-        Button button = (Button) findViewById(R.id.buttonGame_next);
+        displayInitialMessage();
+        Button button = (Button) findViewById(R.id.a_main_btn_next);
         button.setEnabled(true);
         startNextRound();
     }
@@ -74,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayInitialMessage() {
-        TextView txtView = (TextView) findViewById(R.id.main_textViewTaskDescription);
+        TextView txtView = (TextView) findViewById(R.id.a_main_tv_task_description);
         txtView.setText(R.string.initialMessage);
     }
 
@@ -85,9 +92,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpDrawer() {
 
-        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.drawer);
+        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.a_main_ll_drawer);
         playerListAdapter = new PlayerListAdapter(MainActivity.this, playerList.getPlayers());
-
 
         expandableListView.setAdapter(playerListAdapter);
 
@@ -99,16 +105,16 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
+        /*
         int groupCount = playerListAdapter.getGroupCount();
-/*
+
         for (int i = 0; i < groupCount; ++i)
             expandableListView.expandGroup(i);
-*/
-        //registerForContextMenu(expandableListView);
+        */
+        registerForContextMenu(expandableListView);
     }
-/*
-    @Click(R.id.buttonDrawer_newPlayer)
+
+    @Click(R.id.dr_btn_new_player)
     public void showNewPlayerDialog() {
 
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -190,11 +196,11 @@ public class MainActivity extends AppCompatActivity {
         // if everything is ok
         textView.setText("");
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(true);
-    }*/
+    }
 
     private void startGame() {
         startNextRound();
-        Button button = (Button) findViewById(R.id.buttonGame_next);
+        Button button = (Button) findViewById(R.id.a_main_btn_next);
         button.setEnabled(true);
     }
 
@@ -214,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 */
-    @Click(R.id.buttonGame_next)
+    @Click(R.id.a_main_btn_next)
     public void startNextRound() {
         getNextPlayer();
         getNewTask();
@@ -222,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getNextPlayer() {
         Player player = playerList.getNextPlayer();
-        TextView textView = (TextView) findViewById(R.id.main_textViewPlayer);
+        TextView textView = (TextView) findViewById(R.id.a_main_tv_player_name);
         textView.setText(player.getName());
         // TODO show list of player's statuses
     }
@@ -257,9 +263,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayTask(String taskHeading, String taskDescription) {
-        TextView txtView = (TextView) findViewById(R.id.main_textViewTaskHeading);
+        TextView txtView = (TextView) findViewById(R.id.a_main_tv_task_heading);
         txtView.setText(taskHeading);
-        txtView = (TextView) findViewById(R.id.main_textViewTaskDescription);
+        txtView = (TextView) findViewById(R.id.a_main_tv_task_description);
         txtView.setText(taskDescription);
     }
 
