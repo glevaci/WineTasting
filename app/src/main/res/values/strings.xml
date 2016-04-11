@@ -3,26 +3,42 @@
     <string name="start">Započni</string>
     <string name="rules">Pravila</string>
     <string name="quit">Izađi</string>
-    <string name="instructions_main_heading">Upute</string>
-    <string name="startup_description">Ovo je igra za odrasle. Upozorenje: igra uključuje puno političke nekorektnosti, sarkazma, satire i crnog humora. Igra se uz dobro vino ili neko drugo alkoholno piće, pa je punoljetnost nužna.</string>
-    <string name="instructions_players_heading">Igrači</string>
-    <string name="instructions_players_description">Prije početka igre dodajete igrače. Igrače je moguće obrisati tijekom igre. Također je moguće dodati novog igrača. Ime trenutnog igrača piše na vrhu zaslona.</string>
-    <string name="instructions_cards_heading">Kartice</string>
-    <string name="instructions_cards_description">Postoje tri vrste kartica: čin, obveza i status.</string>
-    <string name="instructions_card_action">Kartica čina se odnosi na trenutnog igrača. On treba izvršiti zadatak koji piše na kartici.</string>
-    <string name="instructions_card_mandatory">Kartica obveze se odnosi na sve igrače, ili na one igrače koje kartica opisuje (npr. sve žene). Svi oni trebaju izvršiti ono što kartica nalaže.</string>
-    <string name="instructions_card_status">Kartica statusa zadaje trenutnom igraču kako se on treba početi ponašati. Najčešće vrijede neograničeno, odnosno dok se ne pojavi kartica koja ih može poništiti.</string>
-    <string name="legal_age_info">Klikom na donji gumb potvrđujem da imam više od 18 godina.</string>
-    <string name="add_players_main_heading">Igrači</string>
+
+    <string name="intro">
+        Igra za odrasle s puno političke nekorektnosti, sarkazma, satire i crnog humora.
+        Igra se uz dobro vino ili neko drugo alkoholno piće.\n
+    </string>
+
+    <string name="instructions_heading">Upute</string>
+    <string name="instructions_players"> Igrači </string>
+
+    <string name="instructions_players_description">
+        Prije početka igre dodajete igrače. Igrače je moguće obrisati tijekom igre.
+        Također je moguće dodati novog igrača. Ime trenutnog igrača piše na vrhu zaslona.\n
+    </string>
+
+    <string name="instructions_cards"> Kartice </string>
+
+    <string name="instructions_cards_type">
+        Postoje tri vrste kartica: čin, obveza i status.\n
+        \nKartica čina se odnosi na trenutnog igrača. On treba izvršiti zadatak koji piše na kartici.
+
+        \nKartica obveze  se odnosi na sve igrače, ili na one igrače koje kartica opisuje (npr. sve
+        žene). Svi oni trebaju izvršiti ono što kartica nalaže.
+
+        \nKartica statusa zadaje trenutnom igraču kako se on treba početi ponašati. Najčešće vrijede
+        neograničeno, odnosno dok se ne pojavi kartica koja ih može poništiti.\n
+    </string>
+
     <string name="add_players_add">dodaj</string>
-    <string name="add_players_play">igraj</string>
-    <string name="add_players_existing_players">Postojeći igrači</string>
-    <string name="legal_age_agree">potvrđujem</string>
-    <string name="game_next">sljedeći zadatak</string>
-    <string name="ButtonDrawer_newPlayer">Novi igrač</string>
-    <string name="initialMessage">Ako povučete od lijevog ruba, otvorit će se prozorčić s popisom igrača i opcijom da dodate nove igrače. Prije početka igre treba dodati igrače.</string>
-    <string name="dialog_warning_double">Ime već postoji!</string>
-    <string name="dialog_warning_empty">Ime ne smije biti prazno!</string>
-    <string name="instructions_heading">Kako igrati</string>
+    <string name="new_player">Novi igrač</string>
+
+    <string name="initial_message">
+        Ako povučete od lijevog ruba, otvorit će se prozorčić s popisom igrača i opcijom da dodate
+        nove igrače. Prije početka igre treba dodati igrače.\n
+    </string>
+
     <string name="next_task">sljedeći zadatak</string>
+    <string name="dialog_warning_name_exists">Ime već postoji!</string>
+    <string name="dialog_warning_name_empty">Ime ne smije biti prazno!</string>
 </resources>

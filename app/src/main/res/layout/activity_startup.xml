@@ -9,36 +9,38 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".Intro">
+    tools:context=".activities.StartupActivity_"
+    >
 
-    <WebView
+    <me.biubiubiu.justifytext.library.JustifyTextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:layout_margin="40sp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/a_startup_wv_description"/>
+        android:layout_height="wrap_content"
+        android:id="@+id/a_instructions_jtv_players"
+        android:layout_margin="30dp"
+        android:layout_weight="0.5"
+        android:text="@string/intro"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0.25"
         android:layout_height="0dp"
         android:text="@string/start"
         android:id="@+id/a_startup_btn_start"
         android:layout_gravity="center_horizontal"
         android:padding="15dp"
-        android:layout_margin="50dp"/>
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="50dp"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.25"
         android:text="@string/rules"
         android:id="@+id/a_startup_btn_instructions"
         android:layout_gravity="center_horizontal"
         android:padding="15dp"
-        android:layout_margin="50dp"/>
+        android:layout_marginBottom="50dp"/>
 
 </LinearLayout>

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -11,73 +12,33 @@
     tools:context=".activities.InstructionsActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/a_instructions_tv_players"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/a_instructions_tv_heading"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/instructions_heading"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
+        android:textAlignment="center"
+        android:text="@string/instructions_players"
+        android:layout_margin="12dp"/>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:orientation="vertical"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:layout_below="@+id/a_instructions_tv_heading"
-                  android:layout_alignParentLeft="true"
-                  android:layout_alignParentStart="true">
+    <me.biubiubiu.justifytext.library.JustifyTextView
+        android:id="@+id/a_instructions_jtv_players"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/instructions_players_description"
+        android:layout_margin="12dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/a_instructions_tv_players_heading"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="5dp"
-            android:text="@string/instructions_players_heading"/>
+    <TextView
+        android:id="@+id/a_instructions_tv_cards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="@string/instructions_cards"
+        android:layout_margin="12dp"/>
 
-        <com.bluejamesbond.text.DocumentView
-            xmlns:ext="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            ext:documentView_cacheConfig="auto_quality"
-            ext:documentView_antialias="true"
-            ext:documentView_hyphen="-"
-            ext:documentView_reverse="false"
-            ext:documentView_textAlignment="justified"
-            ext:documentView_textFormat="plain"
-            ext:documentView_textSize="14sp"
-            ext:documentView_textSubPixel="true"
-            ext:documentView_text="@string/instructions_players_description"
-            android:id="@+id/a_instructions_dv_players_description"/>
+    <me.biubiubiu.justifytext.library.JustifyTextView
+        android:id="@+id/a_instructions_jtv_cards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/instructions_cards_type"
+        android:layout_margin="12dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/instructions_cards_heading"
-            android:id="@+id/a_instructions_tv_cards_heading"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="5dp"/>
-
-        <com.bluejamesbond.text.DocumentView
-            xmlns:ext="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            ext:documentView_cacheConfig="auto_quality"
-            ext:documentView_antialias="true"
-            ext:documentView_hyphen="-"
-            ext:documentView_reverse="false"
-            ext:documentView_textAlignment="justified"
-            ext:documentView_textFormat="formatted"
-            ext:documentView_textSize="14sp"
-            ext:documentView_textSubPixel="true"
-            ext:documentView_text="@string/instructions_cards_description"
-            android:id="@+id/a_instructions_dv_cards_description"/>
-
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>

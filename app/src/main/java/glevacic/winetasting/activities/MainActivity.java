@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.Html;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,13 +20,13 @@ import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-
-import org.androidannotations.annotations.Click;
-import org.androidannotations.annotations.EActivity;
 
 import glevacic.winetasting.R;
 import glevacic.winetasting.utils.ActiveStatus;
@@ -32,6 +34,7 @@ import glevacic.winetasting.utils.DatabaseHelper;
 import glevacic.winetasting.utils.Player;
 import glevacic.winetasting.utils.PlayerList;
 import glevacic.winetasting.utils.PlayerListAdapter;
+import me.biubiubiu.justifytext.library.JustifyTextView;
 
 @EActivity
 public class MainActivity extends AppCompatActivity {
@@ -81,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayInitialMessage() {
-        TextView txtView = (TextView) findViewById(R.id.a_main_tv_task_description);
-        txtView.setText(R.string.initialMessage);
+        TextView tv = (TextView) findViewById(R.id.a_main_jtv_task_description);
+        tv.setText(R.string.initial_message);
     }
 
     private void setUpDatabase() {
@@ -92,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpDrawer() {
 
-        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.a_main_ll_drawer);
+        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.dr_elv_players);
         playerListAdapter = new PlayerListAdapter(MainActivity.this, playerList.getPlayers());
 
         expandableListView.setAdapter(playerListAdapter);
@@ -160,7 +163,6 @@ public class MainActivity extends AppCompatActivity {
                                           final TextView textView,
                                           final AlertDialog dialog) {
         return new TextWatcher() {
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
@@ -178,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void checkPlayerName(EditText editText, TextView textView, AlertDialog dialog) {
         if (editText.getText().toString().isEmpty()) {
-            textView.setText(R.string.dialog_warning_empty);
+            textView.setText(R.string.dialog_warning_name_empty);
             dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(false);
             return;
         }
@@ -187,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
         if (!players.isEmpty()) {
             for (Player player : players) {
                 if (player.getName().equals(editText.getText().toString())) {
-                    textView.setText(R.string.dialog_warning_double);
+                    textView.setText(R.string.dialog_warning_name_exists);
                     dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(false);
                     return;
                 }
@@ -223,17 +225,18 @@ public class MainActivity extends AppCompatActivity {
     @Click(R.id.a_main_btn_next)
     public void startNextRound() {
         getNextPlayer();
-        getNewTask();
+        getNextTask();
     }
 
     private void getNextPlayer() {
         Player player = playerList.getNextPlayer();
-        TextView textView = (TextView) findViewById(R.id.a_main_tv_player_name);
-        textView.setText(player.getName());
+        TextView tv = (TextView) findViewById(R.id.a_main_tv_player_name);
+        tv.setText(player.getName());
+
         // TODO show list of player's statuses
     }
 
-    private void getNewTask() {
+    private void getNextTask() {
 
         int taskId = getNextTaskId(numberOfTasks);
         usedTasks.add(taskId);
@@ -263,10 +266,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayTask(String taskHeading, String taskDescription) {
-        TextView txtView = (TextView) findViewById(R.id.a_main_tv_task_heading);
-        txtView.setText(taskHeading);
-        txtView = (TextView) findViewById(R.id.a_main_tv_task_description);
-        txtView.setText(taskDescription);
+        TextView tv = (TextView) findViewById(R.id.a_main_tv_task_heading);
+        tv.setText(taskHeading);
+        TextView jtv = (TextView) findViewById(R.id.a_main_jtv_task_description);
+        jtv.setText(taskDescription + "\n");
     }
 
     private void applyStatusCard(String taskHeading, String taskDescription) {
