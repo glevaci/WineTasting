@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">WineTasting</string>
     <string name="start">Započni</string>
-    <string name="rules">Pravila</string>
-    <string name="quit">Izađi</string>
+    <string name="instructions">Upute</string>
 
     <string name="intro">
         Igra za odrasle s puno političke nekorektnosti, sarkazma, satire i crnog humora.

@@ -9,8 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".activities.StartupActivity_"
-    >
+    tools:context=".activities.StartupActivity_">
 
     <me.biubiubiu.justifytext.library.JustifyTextView
         android:layout_width="match_parent"
@@ -37,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="0.25"
-        android:text="@string/rules"
+        android:text="@string/instructions"
         android:id="@+id/a_startup_btn_instructions"
         android:layout_gravity="center_horizontal"
         android:padding="15dp"

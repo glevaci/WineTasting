@@ -7,17 +7,16 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
-import android.text.Html;
-import android.text.Spanned;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import org.androidannotations.annotations.Click;
@@ -34,7 +33,6 @@ import glevacic.winetasting.utils.DatabaseHelper;
 import glevacic.winetasting.utils.Player;
 import glevacic.winetasting.utils.PlayerList;
 import glevacic.winetasting.utils.PlayerListAdapter;
-import me.biubiubiu.justifytext.library.JustifyTextView;
 
 @EActivity
 public class MainActivity extends AppCompatActivity {
@@ -62,19 +60,11 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        playerList = new PlayerList();
-        Player g = new Player("G");
-
-        ActiveStatus status = new ActiveStatus("jao", "daj radi");
-        g.addActiveStatus(status);
-        playerList.addPlayer(g);
         setUpDrawer();
         setUpDatabase();
         setInitialTaskData();
         displayInitialMessage();
         Button button = (Button) findViewById(R.id.a_main_btn_next);
-        button.setEnabled(true);
-        startNextRound();
     }
 
     private void setInitialTaskData() {
@@ -95,26 +85,35 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpDrawer() {
 
-        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.dr_elv_players);
-        playerListAdapter = new PlayerListAdapter(MainActivity.this, playerList.getPlayers());
+        playerList = new PlayerList();
+        playerListAdapter = new PlayerListAdapter(this, playerList.getPlayers());
 
-        expandableListView.setAdapter(playerListAdapter);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.dr_rv_players);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(playerListAdapter);
 
-        expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.a_main_drawer_layout);
+        drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
-            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                Log.d("onGroupClick:", "worked");
-                parent.collapseGroup(groupPosition);
-                return false;
+            public void onDrawerSlide(View view, float v) {
+            }
+
+            @Override
+            public void onDrawerOpened(View view) {
+            }
+
+            @Override
+            public void onDrawerClosed(View view) {
+                if (waitingForPlayers && playerList.getPlayers().size() > 0) {
+                    waitingForPlayers = false;
+                    startGame();
+                }
+            }
+
+            @Override
+            public void onDrawerStateChanged(int i) {
             }
         });
-        /*
-        int groupCount = playerListAdapter.getGroupCount();
-
-        for (int i = 0; i < groupCount; ++i)
-            expandableListView.expandGroup(i);
-        */
-        registerForContextMenu(expandableListView);
     }
 
     @Click(R.id.dr_btn_new_player)
@@ -150,13 +149,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void dialogOkButtonClicked(EditText editText) {
+        int index = playerList.getPlayers().size();
         Player player = new Player(editText.getText().toString());
         playerList.addPlayer(player);
-        playerListAdapter.notifyDataSetChanged();
-        if (waitingForPlayers) {
-            waitingForPlayers = false;
-            startGame();
-        }
+        playerListAdapter.notifyParentItemInserted(index);
     }
 
     private TextWatcher createTextWatcher(final EditText editText,
@@ -206,22 +202,6 @@ public class MainActivity extends AppCompatActivity {
         button.setEnabled(true);
     }
 
-    /*@Override
-    public boolean onContextItemSelected(MenuItem item) {
-        ExpandableListContextMenuInfo info = (ExpandableListContextMenuInfo) item.getMenuInfo();
-
-        String title = ((TextView) info.targetView).getText().toString();
-
-        int type = ExpandableListView.getPackedPositionType(info.packedPosition);
-        if (type == ExpandableListView.PACKED_POSITION_TYPE_GROUP) {
-            int groupPos = ExpandableListView.getPackedPositionGroup(info.packedPosition);
-            Toast.makeText(this, title + ": Group " + groupPos + " clicked", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-
-        return false;
-    }
-*/
     @Click(R.id.a_main_btn_next)
     public void startNextRound() {
         getNextPlayer();
@@ -273,9 +253,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void applyStatusCard(String taskHeading, String taskDescription) {
+        int parentIndex = playerList.getCurrentIndex();
+        int childIndex = playerList.getCurrentPlayer().getChildItemList().size();
+
         ActiveStatus status = new ActiveStatus(taskHeading, taskDescription);
         playerList.getCurrentPlayer().addActiveStatus(status);
-        playerListAdapter.notifyDataSetChanged();
+        playerListAdapter.notifyChildItemInserted(parentIndex, childIndex);
     }
 
     private int getNextTaskId(int numberOfTasks) {

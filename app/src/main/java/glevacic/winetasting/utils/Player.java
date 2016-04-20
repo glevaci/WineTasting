@@ -1,11 +1,14 @@
 package glevacic.winetasting.utils;
 
+import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player {
+public class Player implements ParentListItem {
 
     private String name;
+
     private List<ActiveStatus> activeStatuses;
 
     public Player(String name) {
@@ -17,12 +20,18 @@ public class Player {
         return name;
     }
 
-    public List<ActiveStatus> getActiveStatuses() {
+    public void addActiveStatus(ActiveStatus status) {
+        activeStatuses.add(status);
+    }
+
+    @Override
+    public List<?> getChildItemList() {
         return activeStatuses;
     }
 
-    public void addActiveStatus(ActiveStatus status) {
-        activeStatuses.add(status);
+    @Override
+    public boolean isInitiallyExpanded() {
+        return true;
     }
 
     // TODO remove active status by id

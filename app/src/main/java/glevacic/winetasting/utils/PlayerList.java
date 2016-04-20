@@ -6,7 +6,7 @@ import java.util.List;
 // TODO name?
 public class PlayerList {
 
-    private ArrayList<Player> players;
+    private List<Player> players;
     private int currentPlayerIndex;
 
     public PlayerList() {
@@ -22,6 +22,10 @@ public class PlayerList {
         return players.get(currentPlayerIndex);
     }
 
+    public int getCurrentIndex() {
+        return currentPlayerIndex;
+    }
+
     public Player getNextPlayer() {
         if (players.isEmpty())
             return null;
@@ -32,12 +36,6 @@ public class PlayerList {
             currentPlayerIndex = 0;
 
         return players.get(currentPlayerIndex);
-    }
-
-    public void removePlayer(String playerName) {
-        for (Player player : players)
-            if (player.getName().equals(playerName))
-                players.remove(player);
     }
 
     public void addPlayer(Player player) {

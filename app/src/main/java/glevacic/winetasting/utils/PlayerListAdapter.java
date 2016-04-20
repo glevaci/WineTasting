@@ -1,99 +1,49 @@
 package glevacic.winetasting.utils;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListView;
-import android.widget.TextView;
+
+import com.bignerdranch.expandablerecyclerview.Adapter.ExpandableRecyclerAdapter;
+import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
 
 import java.util.List;
 
 import glevacic.winetasting.R;
 
-public class PlayerListAdapter extends BaseExpandableListAdapter {
+public class PlayerListAdapter extends ExpandableRecyclerAdapter<PlayerViewHolder, StatusViewHolder> {
 
-    private Context context;
-    private List<Player> players;
+    private LayoutInflater inflater;
 
-    public PlayerListAdapter(Context context, List<Player> players) {
-        this.context = context;
-        this.players = players;
+    public PlayerListAdapter(Context context, @NonNull List<? extends ParentListItem> parentItemList) {
+        super(parentItemList);
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
-    public int getGroupCount() {
-        return players.size();
+    public PlayerViewHolder onCreateParentViewHolder(ViewGroup parentViewGroup) {
+        View view = inflater.inflate(R.layout.item_player, parentViewGroup, false);
+        return new PlayerViewHolder(view);
     }
 
     @Override
-    public int getChildrenCount(int groupPosition) {
-        return players.get(groupPosition).getActiveStatuses().size();
+    public StatusViewHolder onCreateChildViewHolder(ViewGroup childViewGroup) {
+        View view = inflater.inflate(R.layout.item_status, childViewGroup, false);
+        return new StatusViewHolder(view);
     }
 
     @Override
-    public Object getGroup(int groupPosition) {
-        return players.get(groupPosition);
+    public void onBindParentViewHolder(PlayerViewHolder playerViewHolder, int position, ParentListItem parentListItem) {
+        Player player = (Player) parentListItem;
+        playerViewHolder.getTvPlayerName().setText(player.getName());
     }
 
     @Override
-    public Object getChild(int groupPosition, int childPosition) {
-        return players.get(groupPosition).getActiveStatuses().get(childPosition);
+    public void onBindChildViewHolder(StatusViewHolder statusViewHolder, int position, Object childListItem) {
+        ActiveStatus status = (ActiveStatus) childListItem;
+        statusViewHolder.getTvStatusHeading().setText(status.getTitle() + ':');
+        statusViewHolder.getTvStatusDescription().setText(status.getDescription() + '\n');
     }
-
-    @Override
-    public long getGroupId(int groupPosition) {
-        return groupPosition;
-    }
-
-    @Override
-    public long getChildId(int groupPosition, int childPosition) {
-        return childPosition;
-    }
-
-    @Override
-    public boolean hasStableIds() {
-        return true;
-    }
-
-    @Override
-    public View getGroupView(int groupPosition, boolean isExpanded,
-                             View convertView, ViewGroup parent)
-    {
-        Player group = (Player) getGroup(groupPosition);
-        if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) context
-                                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.item_player, parent, false);
-        }
-        TextView tv = (TextView) convertView.findViewById(R.id.player_name);
-        tv.setText(group.getName());
-
-        // TODO check if long click works
-        ExpandableListView mExpandableListView = (ExpandableListView) parent;
-        mExpandableListView.expandGroup(groupPosition);
-        return convertView;
-    }
-
-    @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild,
-                             View convertView, ViewGroup parent)
-    {
-        ActiveStatus status = (ActiveStatus) getChild(groupPosition, childPosition);
-        if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) context
-                                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.item_status, parent, false);
-        }
-        TextView textView = (TextView) convertView.findViewById(R.id.item_status_heading);
-        textView.setText(status.toString());
-        return convertView;
-    }
-
-    @Override
-    public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return false;
-    }
-
 }

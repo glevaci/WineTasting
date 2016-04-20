@@ -7,11 +7,12 @@
               android:clickable="true">
 
     <TextView
-        android:id="@+id/player_name"
+        android:id="@+id/item_player_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
         android:textSize="17sp"
-        android:contextClickable="true"/>
+        android:contextClickable="true"
+        android:background="@color/colorAction"/>
 
 </LinearLayout>

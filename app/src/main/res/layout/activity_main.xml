@@ -1,5 +1,5 @@
 <android.support.v4.widget.DrawerLayout
-    android:id="@+id/drawer_layout"
+    android:id="@+id/a_main_drawer_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -17,22 +17,13 @@
                     tools:context=".MainActivity">
 
         <TextView
-            android:id="@+id/a_main_tv_player_name"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:textAlignment="center"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_alignParentTop="true"/>
-
-        <TextView
             android:id="@+id/a_main_tv_task_heading"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:textAlignment="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_below="@id/a_main_tv_player_name"/>
+            android:layout_alignParentTop="true"/>
 
         <TextView
             android:id="@+id/a_main_jtv_task_description"
@@ -54,13 +45,20 @@
             android:text="@string/next_task"
             android:layout_alignParentBottom="true"/>
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/a_main_tv_player_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:textAlignment="center"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_above="@id/a_main_btn_next"/>
 
+    </RelativeLayout>
 
     <!-- drawer with player list -->
     <LinearLayout
-        android:id="@+id/a_main_ll_drawer"
-        android:layout_width="300dp"
+        android:layout_width="320dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:orientation="vertical">
@@ -74,9 +72,9 @@
             android:focusable="false"
             android:text="@string/new_player"/>
 
-        <ExpandableListView
-            android:id="@+id/dr_elv_players"
-            android:layout_width="240dp"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/dr_rv_players"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:background="#fff"
