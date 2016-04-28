@@ -34,6 +34,7 @@
         android:text="@string/instructions_cards"
         android:layout_margin="12dp"/>
 
+
     <me.biubiubiu.justifytext.library.JustifyTextView
         android:id="@+id/a_instructions_jtv_cards"
         android:layout_width="match_parent"

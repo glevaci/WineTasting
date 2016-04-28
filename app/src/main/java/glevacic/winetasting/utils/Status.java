@@ -1,6 +1,6 @@
 package glevacic.winetasting.utils;
 
-public class ActiveStatus {
+public class Status {
     private String title;
     private String description;
 
@@ -12,13 +12,8 @@ public class ActiveStatus {
         return description;
     }
 
-    public ActiveStatus(String title, String description) {
+    public Status(String title, String description) {
         this.title = title;
         this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return title + ": " + description;
     }
 }

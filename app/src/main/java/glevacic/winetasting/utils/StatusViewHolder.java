@@ -4,25 +4,21 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ChildViewHolder;
+import com.bluejamesbond.text.DocumentView;
 
 import glevacic.winetasting.R;
 
 public class StatusViewHolder extends ChildViewHolder {
 
-    private TextView tvStatusHeading;
-    private TextView tvStatusDescription;
+    private DocumentView dvStatus;
 
     public StatusViewHolder(View itemView) {
         super(itemView);
-        tvStatusHeading = (TextView) itemView.findViewById(R.id.item_status_heading);
-        tvStatusDescription = (TextView) itemView.findViewById(R.id.item_status_description);
+        dvStatus = (DocumentView) itemView.findViewById(R.id.item_status);
     }
 
-    public TextView getTvStatusHeading() {
-        return tvStatusHeading;
+    public DocumentView getDvStatus() {
+        return dvStatus;
     }
 
-    public TextView getTvStatusDescription() {
-        return tvStatusDescription;
-    }
 }

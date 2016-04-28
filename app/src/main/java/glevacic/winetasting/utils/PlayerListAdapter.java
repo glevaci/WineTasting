@@ -2,6 +2,8 @@ package glevacic.winetasting.utils;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.text.Html;
+import android.text.Spannable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,8 +44,9 @@ public class PlayerListAdapter extends ExpandableRecyclerAdapter<PlayerViewHolde
 
     @Override
     public void onBindChildViewHolder(StatusViewHolder statusViewHolder, int position, Object childListItem) {
-        ActiveStatus status = (ActiveStatus) childListItem;
-        statusViewHolder.getTvStatusHeading().setText(status.getTitle() + ':');
-        statusViewHolder.getTvStatusDescription().setText(status.getDescription() + '\n');
+        Status status = (Status) childListItem;
+        String htmlString = "<p><b>" + status.getTitle() + ": </b>" + status.getDescription() + "</p>";
+        Spannable spannable = (Spannable) Html.fromHtml(htmlString);
+        statusViewHolder.getDvStatus().setText(spannable);
     }
 }

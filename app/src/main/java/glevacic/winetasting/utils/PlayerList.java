@@ -2,6 +2,7 @@ package glevacic.winetasting.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 // TODO name?
 public class PlayerList {

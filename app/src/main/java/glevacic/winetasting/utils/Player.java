@@ -9,24 +9,28 @@ public class Player implements ParentListItem {
 
     private String name;
 
-    private List<ActiveStatus> activeStatuses;
+    private List<Status> statuses;
 
     public Player(String name) {
         this.name = name;
-        activeStatuses = new ArrayList<>();
+        statuses = new ArrayList<>();
     }
 
     public String getName() {
         return name;
     }
 
-    public void addActiveStatus(ActiveStatus status) {
-        activeStatuses.add(status);
+    public void addStatus(Status status) {
+        statuses.add(status);
+    }
+
+    public void removeAllStatuses() {
+        statuses.clear();
     }
 
     @Override
     public List<?> getChildItemList() {
-        return activeStatuses;
+        return statuses;
     }
 
     @Override
@@ -34,5 +38,8 @@ public class Player implements ParentListItem {
         return true;
     }
 
-    // TODO remove active status by id
+    public int getNumberOfStatuses() {
+        return statuses.size();
+    }
+
 }

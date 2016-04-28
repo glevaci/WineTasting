@@ -21,11 +21,16 @@ dependencies {
     compile "org.androidannotations:androidannotations-api:3.2"
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+
     compile 'com.android.support:appcompat-v7:24.0.0-alpha1'
     compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'
     compile 'me.biubiubiu.justifytext:library:1.1'
+    compile 'com.github.bluejamesbond:textjustify-android:2.1.6'
     compile 'com.android.support:recyclerview-v7:23.3.0'
     compile 'com.bignerdranch.android:expandablerecyclerview:2.1.1'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:design:23.3.0'
+    compile 'com.android.support:percent:23.3.0'
 }
 
 

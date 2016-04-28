@@ -7,16 +7,19 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import org.androidannotations.annotations.Click;
@@ -28,11 +31,19 @@ import java.util.Random;
 import java.util.Set;
 
 import glevacic.winetasting.R;
-import glevacic.winetasting.utils.ActiveStatus;
+import glevacic.winetasting.utils.Status;
 import glevacic.winetasting.utils.DatabaseHelper;
 import glevacic.winetasting.utils.Player;
 import glevacic.winetasting.utils.PlayerList;
 import glevacic.winetasting.utils.PlayerListAdapter;
+
+/* TODO
+* dodati globalne statuse (type == 7)
+* dodati popup za dodavanje igrača na početku
+* preinačiti Player tj PlayerListItem?
+* dodati context menu za igrače - brisanje, promjena imena
+* dodati popis aktivnih statusa za trenutnog igrača?
+*/
 
 @EActivity
 public class MainActivity extends AppCompatActivity {
@@ -44,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
     private static final String CARD_TYPE = "type";
     private static final String[] COLUMNS = {HEADING, DESCRIPTION, CARD_TYPE};
     private static final int STATUS = 3;
+    private static final int REMOVE_ALL_STATUSES = 4;
+    private static final int REMOVE_RANDOM_PLAYER_STATUSES = 5;
+    private static final int REMOVE_RANDOM_STATUSES_FROM_GAME = 6;
 
     private PlayerListAdapter playerListAdapter;
     private PlayerList playerList;
@@ -57,25 +71,22 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUpDrawer();
         setUpDatabase();
         setInitialTaskData();
         displayInitialMessage();
-        Button button = (Button) findViewById(R.id.a_main_btn_next);
+    }
+
+    private void displayInitialMessage() {
+        // TODO show dialog
     }
 
     private void setInitialTaskData() {
         usedTasks = new HashSet<>();
         numberOfTasks = (int) DatabaseUtils.queryNumEntries(database, TABLE);
         random = new Random();
-    }
-
-    private void displayInitialMessage() {
-        TextView tv = (TextView) findViewById(R.id.a_main_jtv_task_description);
-        tv.setText(R.string.initial_message);
     }
 
     private void setUpDatabase() {
@@ -92,7 +103,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(playerListAdapter);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.a_main_drawer_layout);
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.a_main_drawer_layout);
+
         drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(View view, float v) {
@@ -114,6 +126,11 @@ public class MainActivity extends AppCompatActivity {
             public void onDrawerStateChanged(int i) {
             }
         });
+
+        drawer.openDrawer(Gravity.LEFT);
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_OPEN);
+
+        showInfoDialog("Dodavanje igrača", "Prije početka igre trebate dodati igrače!");
     }
 
     @Click(R.id.dr_btn_new_player)
@@ -149,10 +166,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void dialogOkButtonClicked(EditText editText) {
-        int index = playerList.getPlayers().size();
+        int i = playerList.getPlayers().size();
         Player player = new Player(editText.getText().toString());
         playerList.addPlayer(player);
-        playerListAdapter.notifyParentItemInserted(index);
+        playerListAdapter.notifyParentItemInserted(i);
+
+        if (i == 0) {
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.a_main_drawer_layout);
+            drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        }
     }
 
     private TextWatcher createTextWatcher(final EditText editText,
@@ -218,11 +240,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void getNextTask() {
 
+        if (usedTasks.size() == numberOfTasks)
+            restartGame();
+
         int taskId = getNextTaskId(numberOfTasks);
         usedTasks.add(taskId);
 
         // id is autoincremented, data is never deleted from table
-        // => this cursor will never be null or empty
+        // so this cursor will never be null or empty
         Cursor cursor = database.query(TABLE,           // table
                 COLUMNS,                                // column names
                 ID + " = ?",                            // select
@@ -236,13 +261,83 @@ public class MainActivity extends AppCompatActivity {
 
         String taskHeading = cursor.getString(cursor.getColumnIndex(HEADING));
         String taskDescription = cursor.getString(cursor.getColumnIndex(DESCRIPTION));
-        displayTask(taskHeading, taskDescription);
-
         int cardType = cursor.getInt(cursor.getColumnIndex(CARD_TYPE));
+
         if (cardType == STATUS)
             applyStatusCard(taskHeading, taskDescription);
 
+        else if (cardType == REMOVE_ALL_STATUSES)
+            removeAllStatusesFromGame();
+
+        else if (cardType == REMOVE_RANDOM_PLAYER_STATUSES)
+            // we need to update taskDescription with random player's name
+            taskDescription = removeRandomPlayerStatuses(taskDescription);
+
+        else if (cardType == REMOVE_RANDOM_STATUSES_FROM_GAME)
+            removeRandomStatusesFromGame();
+
+        displayTask(taskHeading, taskDescription);
         cursor.close();
+    }
+
+    private void restartGame() {
+        usedTasks.clear();
+        removeAllStatusesFromGame();
+        showInfoDialog("Kraj", "Sve kartice su iskorištene, igra kreće ispočetka.");
+    }
+
+    private void applyStatusCard(String taskHeading, String taskDescription) {
+        int parentIndex = playerList.getCurrentIndex();
+        int childIndex = playerList.getCurrentPlayer().getChildItemList().size();
+
+        Status status = new Status(taskHeading, taskDescription);
+        playerList.getCurrentPlayer().addStatus(status);
+        playerListAdapter.notifyChildItemInserted(parentIndex, childIndex);
+    }
+
+    private void removeRandomStatusesFromGame() {
+        Random rand = new Random();
+        for (int i = 0; i < playerList.getPlayers().size(); ++i) {
+            for (int st = 0; st < playerList.getPlayers().get(i).getNumberOfStatuses(); ++st) {
+                int chance = rand.nextInt(3);
+                if (chance != 0) {
+                    playerList.getPlayers().get(i).getChildItemList().remove(st);
+                    playerListAdapter.notifyChildItemRemoved(i, st);
+                }
+            }
+        }
+    }
+
+    @NonNull
+    private String removeRandomPlayerStatuses(String taskDescription) {
+        int i = random.nextInt(playerList.getPlayers().size());
+        String name = playerList.getPlayers().get(i).getName();
+        taskDescription = name  + " " + taskDescription;
+        int count = playerList.getPlayers().get(i).getNumberOfStatuses();
+        playerListAdapter.notifyChildItemRangeRemoved(i, 0, count);
+        playerList.getPlayers().get(i).removeAllStatuses();
+        return taskDescription;
+    }
+
+    private void removeAllStatusesFromGame() {
+        for (int i = 0; i < playerList.getPlayers().size(); ++i) {
+            int count = playerList.getPlayers().get(i).getNumberOfStatuses();
+            playerListAdapter.notifyChildItemRangeRemoved(i, 0, count);
+            playerList.getPlayers().get(i).removeAllStatuses();
+        }
+    }
+
+    private void showInfoDialog(String heading, String message) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        dialogBuilder.setTitle(heading);
+        dialogBuilder.setMessage(message);
+        dialogBuilder.setCancelable(false);
+        dialogBuilder.setPositiveButton("OK", new OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+        AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
     }
 
     private void displayTask(String taskHeading, String taskDescription) {
@@ -252,21 +347,11 @@ public class MainActivity extends AppCompatActivity {
         jtv.setText(taskDescription + "\n");
     }
 
-    private void applyStatusCard(String taskHeading, String taskDescription) {
-        int parentIndex = playerList.getCurrentIndex();
-        int childIndex = playerList.getCurrentPlayer().getChildItemList().size();
-
-        ActiveStatus status = new ActiveStatus(taskHeading, taskDescription);
-        playerList.getCurrentPlayer().addActiveStatus(status);
-        playerListAdapter.notifyChildItemInserted(parentIndex, childIndex);
-    }
-
     private int getNextTaskId(int numberOfTasks) {
         // indices in table start from 1
         int taskId = random.nextInt(numberOfTasks) + 1;
         while (usedTasks.contains(taskId))
             taskId = random.nextInt(numberOfTasks) + 1;
-
         return taskId;
     }
 }
