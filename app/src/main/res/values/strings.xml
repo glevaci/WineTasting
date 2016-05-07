@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">WineTasting</string>
-    <string name="start">Započni</string>
+    <string name="start_new_game">Započni novu igru</string>
+    <string name="continue_game">Nastavi s igrom</string>
     <string name="instructions">Upute</string>
 
     <string name="intro">
@@ -9,35 +10,39 @@
     </string>
 
     <string name="instructions_heading">Upute</string>
-    <string name="instructions_players"> Igrači </string>
 
-    <string name="instructions_players_description">
-        Prije početka igre dodajete igrače. Igrače je moguće obrisati tijekom igre.
-        Također je moguće dodati novog igrača. Ime trenutnog igrača piše na vrhu zaslona.\n
-    </string>
-
-    <string name="instructions_cards"> Kartice </string>
-
-    <string name="instructions_cards_type">
-        Postoje tri vrste kartica: čin, obveza i status.\n
-        \nKartica čina se odnosi na trenutnog igrača. On treba izvršiti zadatak koji piše na kartici.
-
-        \nKartica obveze  se odnosi na sve igrače, ili na one igrače koje kartica opisuje (npr. sve
-        žene). Svi oni trebaju izvršiti ono što kartica nalaže.
-
-        \nKartica statusa zadaje trenutnom igraču kako se on treba početi ponašati. Najčešće vrijede
-        neograničeno, odnosno dok se ne pojavi kartica koja ih može poništiti.\n
+    <string name="instructions_cards" formatted="false">
+        <![CDATA[
+            <p> Postoje tri vrste kartica: čin, obveza i status.
+            </p>
+            <p> <font color=%s> Kartica čina </font> se odnosi na trenutnog igrača.
+                On treba izvršiti zadatak koji piše na kartici.
+            </p>
+            <p> <font color=%s> Kartica obveze </font> se odnosi na sve igrače, ili na one igrače
+                koje kartica opisuje (npr. sve žene). Svi oni trebaju izvršiti ono što kartica
+                nalaže.
+            </p>
+            <p> <font color=%s> Kartica statusa </font> zadaje trenutnom igraču kako se on treba
+                početi ponašati. Vrijede neograničeno, odnosno sve dok se ne pojavi kartica koja ih
+                može poništiti.
+            </p>
+        ]]>
     </string>
 
     <string name="add_players_add">dodaj</string>
     <string name="new_player">Novi igrač</string>
 
-    <string name="initial_message">
-        Ako povučete od lijevog ruba, otvorit će se prozorčić s popisom igrača i opcijom da dodate
-        nove igrače. Prije početka igre treba dodati igrače.\n
+    <string name="next_task">sljedeći zadatak</string>
+    <string name="dialog_new_player_heading">Novi igrač</string>
+    <string name="dialog_new_player_name">Ime:</string>
+    <string name="dialog_new_player_name_exists">Ime već postoji!</string>
+    <string name="dialog_new_player_name_empty">Ime ne smije biti prazno!</string>
+
+    <string name="dialog_intro_heading"> Igrači</string>
+
+    <string name="dialog_intro_message">Prije početka igre trebate dodati igrače.
+        Dugim klikom na ime igrača otvara se opcija brisanja tog igrača ili promjene imena.
+        Kasnije ćete ovdje vidjeti i koje statuse ima koji igrač. Uživajte!
     </string>
 
-    <string name="next_task">sljedeći zadatak</string>
-    <string name="dialog_warning_name_exists">Ime već postoji!</string>
-    <string name="dialog_warning_name_empty">Ime ne smije biti prazno!</string>
 </resources>

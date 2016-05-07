@@ -13,6 +13,7 @@
         ext:documentView_textFormat="formatted"
         ext:documentView_textAlignment="justified"
         ext:documentView_textSize="14sp"
+        ext:documentView_antialias="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="-10sp"/>

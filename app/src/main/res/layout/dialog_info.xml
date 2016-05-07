@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <com.bluejamesbond.text.DocumentView
+        android:id="@+id/dialog_info_dv"
+        xmlns:ext="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        ext:documentView_textAlignment="justified"
+        ext:documentView_textFormat="plain"
+        ext:documentView_antialias="true"
+        ext:documentView_cacheConfig="auto_quality"
+        ext:documentView_hyphen="-"
+        ext:documentView_insetPadding="@dimen/large_padding"
+        ext:documentView_textSize="14sp"/>
+</LinearLayout>

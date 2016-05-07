@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-// TODO name?
 public class PlayerList {
 
     private List<Player> players;

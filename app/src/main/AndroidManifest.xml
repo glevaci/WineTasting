@@ -11,7 +11,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity android:name=".activities.InstructionsActivity"/>
-        <activity android:name=".activities.MainActivity_"/>
+
+        <activity android:name=".activities.MainActivity_"
+                  android:launchMode="singleTop"/>
     </application>
 </manifest>
