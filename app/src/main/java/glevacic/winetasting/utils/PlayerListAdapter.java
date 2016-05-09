@@ -40,6 +40,7 @@ public class PlayerListAdapter extends ExpandableRecyclerAdapter<PlayerViewHolde
     public void onBindParentViewHolder(PlayerViewHolder playerViewHolder, int position, ParentListItem parentListItem) {
         Player player = (Player) parentListItem;
         playerViewHolder.getTvPlayerName().setText(player.getName());
+        playerViewHolder.setExpanded(true);
     }
 
     @Override

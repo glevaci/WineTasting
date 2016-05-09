@@ -71,7 +71,7 @@
             android:focusable="false"
             android:text="@string/new_player"/>
 
-        <android.support.v7.widget.RecyclerView
+        <glevacic.winetasting.utils.ContextMenuRecyclerView
             android:id="@+id/dr_rv_players"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

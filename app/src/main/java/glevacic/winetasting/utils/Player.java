@@ -20,6 +20,10 @@ public class Player implements ParentListItem {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void addStatus(Status status) {
         statuses.add(status);
     }
@@ -41,5 +45,4 @@ public class Player implements ParentListItem {
     public int getNumberOfStatuses() {
         return statuses.size();
     }
-
 }

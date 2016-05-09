@@ -1,12 +1,14 @@
 <resources>
     <string name="app_name">WineTasting</string>
-    <string name="start_new_game">Započni novu igru</string>
+    <string name="start_new_game">Nova igra</string>
     <string name="continue_game">Nastavi s igrom</string>
     <string name="instructions">Upute</string>
 
     <string name="intro">
         Igra za odrasle s puno političke nekorektnosti, sarkazma, satire i crnog humora.
-        Igra se uz dobro vino ili neko drugo alkoholno piće.\n
+        Igra se uz dobro vino ili neko drugo alkoholno piće.
+
+        Klikom na donji gumb Nova igra se slažete da ste punoljetni.
     </string>
 
     <string name="instructions_heading">Upute</string>
@@ -44,5 +46,7 @@
         Dugim klikom na ime igrača otvara se opcija brisanja tog igrača ili promjene imena.
         Kasnije ćete ovdje vidjeti i koje statuse ima koji igrač. Uživajte!
     </string>
+    <string name="menu_player_rename">Promijeni ime</string>
+    <string name="menu_player_delete">Obriši</string>
 
 </resources>

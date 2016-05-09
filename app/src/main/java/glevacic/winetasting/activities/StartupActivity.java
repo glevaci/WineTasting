@@ -21,14 +21,13 @@ public class StartupActivity extends AppCompatActivity {
     @Click(R.id.a_startup_btn_start)
     void startNewGame() {
         Intent intent = new Intent(this, MainActivity_.class);
-        intent.putExtra("continue", false);
+        intent.putExtra("newGame", true);
         startActivity(intent);
     }
 
     @Click(R.id.a_startup_btn_continue)
     void continueGame() {
         Intent intent = new Intent(this, MainActivity_.class);
-        intent.putExtra("continue", true);
         startActivity(intent);
     }
 
